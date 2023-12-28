@@ -1,6 +1,9 @@
-import { IsEnum, IsOptional } from "class-validator";
+import { IsOptional } from "class-validator";
 
 
+/**
+ * USER UPDATE DTO
+ */
 export class UpdateUserDto {
 
   @IsOptional()

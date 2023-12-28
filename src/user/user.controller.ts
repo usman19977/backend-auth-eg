@@ -9,7 +9,12 @@ export class UserController {
   ) {
 
   }
-
+  /**
+   * @author Usman Bashir
+   * @description USER DETAILS ROUTE
+   * @param req 
+   * @returns 
+   */
   @UseGuards(AuthGuard('jwt'))
   @Get('getUserDetails')
   async getUserDetails(@Request() req: any) {

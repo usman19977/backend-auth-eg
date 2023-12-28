@@ -15,6 +15,13 @@ export class AuthService {
 
     ) { }
 
+    /**
+     * @author Usman Bashir
+     * @description METHOD WILL VALIDATE USE CREDENTIALS
+     * @param email 
+     * @param password 
+     * @returns 
+     */
     async validateUserCredentials(
         email: string,
         password: string
@@ -22,6 +29,13 @@ export class AuthService {
         const user = await this.userService.getUserByUserNamePassword({ email, password });
         return user ?? null;
     }
+
+    /**
+     * @author Usman Bashir
+     * @description FUNCTION WILL LOGIN USER AND RETURN AUTH TOKEN | REFRESH TOKEN
+     * @param user 
+     * @returns 
+     */
     async loginWithCredentials(user: User) {
 
         const tokens = await this.getTokens(user._id, user.email);
@@ -36,6 +50,13 @@ export class AuthService {
         };
 
     }
+
+    /**
+     * @author Usman Bashir
+     * @description FUNCTION WILL CREATE USER
+     * @param createUserDto 
+     * @returns 
+     */
     async signUp(createUserDto: CreateUserDto) {
         const userExists = await this.userService.getUserByUserName(
             createUserDto.email,
@@ -63,11 +84,26 @@ export class AuthService {
 
 
     }
+
+    /**
+     * @author Usman Bashir
+     * @description FUNCTION WILL GENERATE AND RETURN ENCRYPTED STRING
+     * @param password 
+     * @returns 
+     */
     async getHashData(password: string): Promise<string> {
         const salt = await bcrypt.genSalt();
         const hashPassword = await bcrypt.hash(password, salt);
         return hashPassword;
     }
+
+    /**
+     * @author Usman Bashir
+     * @description FUNCTION WILL RETURN TOKENS
+     * @param userId 
+     * @param username 
+     * @returns 
+     */
     async getTokens(userId: string, username: string) {
         const [accessToken, refreshToken] = await Promise.all([
             this.jwtService.sign(
@@ -96,18 +132,40 @@ export class AuthService {
             refreshToken,
         };
     }
+
+    /**
+     * @author Usman Bashir
+     * @description FUNCTION WILL LOG'S USER OUT | REVOKE A TOKEN IF MAINTAINING IN DB 
+     * @returns 
+     */
     async logout() {
         /**
          * We Can save the log when user loggs out in backend
          */
         return { success_message: 'Logout Successfully' };
     }
+
+    /**
+     * @author Usman Bashir
+     * @description FUNCTION WILL REFRESH THE TOKEN
+     * @param userId 
+     * @returns 
+     */
     async refreshTokens(userId: string) {
 
         let user = await this.userService.findById(userId);
         const tokens = await this.getTokens(userId, user.email);
         return tokens;
     }
+
+    /**
+     * @author Usman Bashir
+     * @description WILL RETURN USER DETAILS
+     * @param id 
+     * @param email 
+     * @param req 
+     * @returns 
+     */
     async userDetails(id: any, email: string, req: any) {
         try {
             let getUserById = await this.userService.findById(id);

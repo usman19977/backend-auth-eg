@@ -3,6 +3,10 @@ import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from 'passport-local';
 import { AuthService } from "../auth.service";
 
+/**
+ * @author Usman Bashir
+ * @description Json Web Token Local Strategy
+ */
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly authService: AuthService) {

@@ -1,5 +1,9 @@
 import * as mongoose from 'mongoose';
 
+/**
+ * @author Usman Bashir
+ * @description Database Provider | Connection ( Instance )
+ */
 export const databaseProviders = [
   {
     provide: 'DATABASE_CONNECTION',

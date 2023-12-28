@@ -3,6 +3,10 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
 import { Injectable } from '@nestjs/common';
 
+/**
+ * @author Usman Bashir
+ * @description Json Web Token Refresh Token Strategy
+ */
 @Injectable()
 export class RefreshTokenStrategy extends PassportStrategy(
   Strategy,

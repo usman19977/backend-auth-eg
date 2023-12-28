@@ -1,7 +1,10 @@
 import { Mongoose } from 'mongoose';
 import { UserSchema } from './user.schema';
 
-
+/**
+ * @author Usman Bashir
+ * @description Database Provider | Connection ( Instance )
+ */
 export const userProviders = [
   {
     provide: 'USER_MODEL',
